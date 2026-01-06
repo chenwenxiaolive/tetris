@@ -368,6 +368,26 @@ export default function Tetris({ onGameOver }: TetrisProps) {
 
       {/* Side Panel */}
       <div className="flex flex-col gap-3 w-36">
+        {/* Game Status Messages */}
+        {gameOver && (
+          <div className="relative">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-red-500 to-pink-500 rounded-lg blur opacity-40 animate-pulse" />
+            <div className="relative bg-black/60 backdrop-blur-sm p-3 rounded-lg border border-red-500/30">
+              <p className="text-center text-red-400 font-bold text-lg animate-pulse">游戏结束!</p>
+              <p className="text-center text-gray-400 text-xs mt-1">得分: {score}</p>
+            </div>
+          </div>
+        )}
+
+        {isPaused && gameStarted && !gameOver && (
+          <div className="relative">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg blur opacity-40 animate-pulse" />
+            <div className="relative bg-black/60 backdrop-blur-sm p-3 rounded-lg border border-yellow-500/30">
+              <p className="text-center text-yellow-400 font-bold text-lg animate-pulse">已暂停</p>
+            </div>
+          </div>
+        )}
+
         {/* Stats Cards */}
         {[
           { label: '分数', value: score, gradient: 'from-cyan-500 to-blue-500' },
@@ -415,18 +435,6 @@ export default function Tetris({ onGameOver }: TetrisProps) {
               {isPaused ? '继续' : '暂停'}
             </div>
           </button>
-        )}
-
-        {gameOver && (
-          <div className="text-center py-2">
-            <span className="text-red-400 font-bold animate-pulse">游戏结束!</span>
-          </div>
-        )}
-
-        {isPaused && gameStarted && !gameOver && (
-          <div className="text-center py-2">
-            <span className="text-yellow-400 font-bold animate-pulse">已暂停</span>
-          </div>
         )}
 
         {/* Controls */}
